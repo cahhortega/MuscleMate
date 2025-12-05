@@ -1,6 +1,6 @@
 //
 //  DesignSystem.swift
-//  TICProject
+//  MuscleMate
 //
 //  Created by Carolina Ortega on 04/12/25.
 //
