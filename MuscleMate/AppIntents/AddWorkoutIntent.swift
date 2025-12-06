@@ -20,7 +20,6 @@ struct AddWorkoutIntent: AppIntent {
     @Parameter(title: "Data do Treino")
     var date: Date
     
-    // Declara que retorna um valor String
     static var parameterSummary: some ParameterSummary {
         Summary("Adicionar treino \(\.$title) na data \(\.$date)") { }
     }
@@ -34,5 +33,4 @@ struct AddWorkoutIntent: AppIntent {
         
         return .result(value: "Treino '\(title)' adicionado com sucesso para \(date.formatted(.dateTime.month().day().year()))!")
     }
-    
 }

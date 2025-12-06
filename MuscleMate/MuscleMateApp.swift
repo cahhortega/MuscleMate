@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct MuscleMateApp: App {
+    init() {
+        UINavigationBar.setCustomFont()
+    }
+    
     var body: some Scene {
         WindowGroup {
             HomeView()

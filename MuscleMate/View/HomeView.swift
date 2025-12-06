@@ -16,7 +16,6 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 16) {
-                
                 // MARK: - Calendário horizontal
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
@@ -26,11 +25,11 @@ struct HomeView: View {
                                 
                                 VStack(spacing: 8) {
                                     Text(day.dayName())
-                                        .font(.caption)
+                                        .font(.designSystem(.caption))
                                         .foregroundColor(day.isSameDay(as: selectedDate) ? .black : .secondary)
                                     
                                     Text("\(day.dayOfMonth)")
-                                        .font(.headline)
+                                        .font(.designSystem(.button))
                                         .foregroundColor(day.isSameDay(as: selectedDate) ? .white : .primary)
                                         .frame(width: 40, height: 40)
                                         .background(day.isSameDay(as: selectedDate) ? Color.blue : Color.gray.opacity(0.2))
@@ -54,7 +53,7 @@ struct HomeView: View {
                 if filtered.isEmpty {
                     Spacer()
                     Text("Nenhum treino para este dia")
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.designSystem(color: .main(.text)))
                     Spacer()
                 } else {
                     List {
@@ -62,11 +61,11 @@ struct HomeView: View {
                             NavigationLink(destination: WorkoutDetailView(workout: binding(for: workout))) {
                                 HStack {
                                     Text(workout.title)
-                                        .font(.headline)
+                                        .font(.designSystem(.cell))
                                     Spacer()
                                     Text("\(workout.exercises.count) exercises")
-                                        .foregroundColor(.secondary)
-                                        .font(.subheadline)
+                                        .foregroundStyle(.designSystem(color: .main(.text)))
+                                        .font(.designSystem(.cell))
                                 }
                                 .padding(.vertical, 6)
                             }
@@ -78,10 +77,13 @@ struct HomeView: View {
                             }
                         }
                     }
-                    .listStyle(.plain)
+                    .listStyle(.insetGrouped)
                 }
             }
             .navigationTitle("Treinos")
+            .scrollContentBackground(.hidden)
+            .background(Color(.designSystem(color: .background(.primary))))
+            
             .toolbar {
                 Button { showAddWorkout.toggle() } label: {
                     Image(systemName: "plus")
@@ -100,10 +102,6 @@ struct HomeView: View {
         return $repo.workouts[index]
     }
 }
-
-
-
-
 
 // MARK: - Preview
 struct ContentView_Previews: PreviewProvider {

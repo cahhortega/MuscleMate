@@ -10,6 +10,7 @@ import SwiftUI
 
 struct WorkoutDetailView: View {
     @Binding var workout: Workout
+    
     @State private var selectedExercise: Exercise?
     @State private var showAddSetSheet: Bool = false
     @State private var showAddExerciseSheet: Bool = false
@@ -32,6 +33,7 @@ struct WorkoutDetailView: View {
                             Divider()
                             Text("Peso: \(Int(set.weight))kg")
                         }
+                        .font(.designSystem(.cell))
                     }
                     .onDelete { offsets in
                         exercise.sets.remove(atOffsets: offsets)
@@ -42,12 +44,16 @@ struct WorkoutDetailView: View {
                         showAddSetSheet = true
                     } label: {
                         Label("Adicionar set", systemImage: "plus.circle.fill")
-                            .foregroundColor(.blue)
+                            .foregroundStyle(.designSystem(color: .main(.primary)))
+                            .font(.designSystem(.button))
                     }
                 } label: {
                     Text(exercise.name)
-                        .font(.headline)
+                        .font(.designSystem(.cell))
                 }
+            }
+            .onDelete { offsets in
+                workout.exercises.remove(atOffsets: offsets)
             }
             
             Button {
@@ -55,8 +61,14 @@ struct WorkoutDetailView: View {
             } label: {
                 Label("Adicionar exercício", systemImage: "plus.circle.fill")
             }
+            .foregroundStyle(.designSystem(color: .main(.primary)))
+            .font(.designSystem(.button))
+            
         }
+        .scrollContentBackground(.hidden)
+        .background(Color(.designSystem(color: .background(.primary))).ignoresSafeArea())
         .navigationTitle(workout.title)
+        
         .sheet(isPresented: $showAddSetSheet) {
             if let bindingExercise = bindingForSelectedExercise() {
                 AddSetModalView(exercise: bindingExercise, isPresented: $showAddSetSheet)
@@ -67,6 +79,7 @@ struct WorkoutDetailView: View {
             AddExerciseView(exercises: $workout.exercises, isPresented: $showAddExerciseSheet)
         }
     }
+    
     
     private func bindingForSelectedExercise() -> Binding<Exercise>? {
         guard let exercise = selectedExercise,

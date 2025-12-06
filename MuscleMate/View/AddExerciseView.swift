@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import SwiftUI
 
 struct AddExerciseView: View {
     @Binding var exercises: [Exercise]
@@ -15,8 +14,6 @@ struct AddExerciseView: View {
     
     @State private var name: String = ""
     @State private var sets: [Set] = []
-    
-    // Modal para adicionar set
     @State private var showAddSetSheet: Bool = false
     @State private var tempExercise: Exercise = Exercise(name: "", sets: [])
     
@@ -25,25 +22,33 @@ struct AddExerciseView: View {
             Form {
                 Section(header: Text("Nome do exercício")) {
                     TextField("Ex: Supino", text: $name)
+                        .font(.designSystem(.cell))
+
                 }
-                
+                .font(.designSystem(.section))
+
                 Section(header: Text("Sets")) {
-                    // Lista de sets atuais
                     ForEach(sets) { set in
-                        Text("Reps: \(set.reps), Peso: \(Int(set.weight))kg")
+                        HStack(spacing: 16) {
+                            Text("Reps: \(set.reps)")
+                            Divider()
+                            Text("Peso: \(Int(set.weight))kg")
+                        }
+                        .font(.designSystem(.cell))
                     }
                     .onDelete { offsets in
                         sets.remove(atOffsets: offsets)
                     }
                     
-                    // Botão para adicionar novo set
                     Button {
-                        // Prepara o tempExercise com os sets atuais
                         tempExercise = Exercise(name: name.isEmpty ? "Novo exercício" : name, sets: sets)
                         showAddSetSheet = true
                     } label: {
                         Label("Adicionar set", systemImage: "plus.circle.fill")
                     }
+                    .foregroundStyle(.designSystem(color: .main(.primary)))
+                    .font(.designSystem(.button))
+
                     .sheet(isPresented: $showAddSetSheet) {
                         AddSetModalView(exercise: $tempExercise, isPresented: $showAddSetSheet)
                             .presentationDetents([.medium])
@@ -52,8 +57,13 @@ struct AddExerciseView: View {
                             }
                     }
                 }
+                .font(.designSystem(.section))
+
             }
             .navigationTitle("Novo Exercício")
+            .scrollContentBackground(.hidden)
+            .background(.designSystem(color: .background(.secondary)))
+
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Salvar") {
@@ -62,9 +72,13 @@ struct AddExerciseView: View {
                         exercises.append(newExercise)
                         isPresented = false
                     }
+                    .font(.designSystem(.button))
                 }
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancelar") { isPresented = false }
+                    Button("Cancelar") {
+                        isPresented = false
+                    }
+                    .font(.designSystem(.button))
                 }
             }
         }

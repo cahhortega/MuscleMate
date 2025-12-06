@@ -10,7 +10,9 @@ import SwiftUI
 
 struct AddWorkoutView: View {
     @ObservedObject var repo: WorkoutRepository
+    
     @Binding var isPresented: Bool
+    
     var selectedDate: Date
     
     @State private var name: String = ""
@@ -22,7 +24,9 @@ struct AddWorkoutView: View {
             Form {
                 Section(header: Text("Treino")) {
                     TextField("Nome do treino", text: $name)
+                        .font(.designSystem(.cell))
                 }
+                .font(.designSystem(.section))
                 
                 Section(header: Text("Exercícios")) {
                     ForEach(exercises) { exercise in
@@ -39,11 +43,19 @@ struct AddWorkoutView: View {
                     } label: {
                         Label("Adicionar Exercício", systemImage: "plus.circle.fill")
                     }
+                    .font(.designSystem(.button))
+                    .foregroundStyle(.designSystem(color: .main(.primary)))
+                    
                     .sheet(isPresented: $showAddExerciseSheet) {
                         AddExerciseView(exercises: $exercises, isPresented: $showAddExerciseSheet)
                     }
                 }
+                .font(.designSystem(.section))
+                
             }
+            .scrollContentBackground(.hidden)
+            .background(.designSystem(color: .background(.secondary)))
+
             .navigationTitle("Novo Treino")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
@@ -53,9 +65,14 @@ struct AddWorkoutView: View {
                         repo.workouts.insert(newWorkout, at: 0)
                         isPresented = false
                     }
+                    .font(.designSystem(.button))
                 }
+                
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancelar") { isPresented = false }
+                    Button("Cancelar") {
+                        isPresented = false
+                    }
+                    .font(.designSystem(.button))
                 }
             }
         }
