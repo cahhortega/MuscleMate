@@ -23,7 +23,7 @@ struct AddWorkoutView: View {
         NavigationStack {
             Form {
                 Section(header: Text("Treino")) {
-                    TextField("Nome do treino", text: $name)
+                    TextField("Ex: Superiores", text: $name)
                         .font(.designSystem(.cell))
                 }
                 .font(.designSystem(.section))
@@ -41,7 +41,7 @@ struct AddWorkoutView: View {
                             showAddExerciseSheet = true
                         }
                     } label: {
-                        Label("Adicionar Exercício", systemImage: "plus.circle.fill")
+                        Label("Adicionar exercício", systemImage: "plus.circle.fill")
                     }
                     .font(.designSystem(.button))
                     .foregroundStyle(.designSystem(color: .main(.primary)))
@@ -56,11 +56,11 @@ struct AddWorkoutView: View {
             .scrollContentBackground(.hidden)
             .background(.designSystem(color: .background(.secondary)))
 
-            .navigationTitle("Novo Treino")
+            .navigationTitle("Novo treino")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Salvar") {
-                        let finalName = name.isEmpty ? "Novo Treino" : name
+                        let finalName = name.isEmpty ? "Novo treino" : name
                         let newWorkout = Workout(date: selectedDate, title: finalName, exercises: exercises)
                         repo.workouts.insert(newWorkout, at: 0)
                         isPresented = false

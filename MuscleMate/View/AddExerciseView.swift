@@ -50,7 +50,7 @@ struct AddExerciseView: View {
                     .font(.designSystem(.button))
 
                     .sheet(isPresented: $showAddSetSheet) {
-                        AddSetModalView(exercise: $tempExercise, isPresented: $showAddSetSheet)
+                        AddSetView(exercise: $tempExercise, isPresented: $showAddSetSheet)
                             .presentationDetents([.medium])
                             .onDisappear {
                                 sets = tempExercise.sets
@@ -60,7 +60,7 @@ struct AddExerciseView: View {
                 .font(.designSystem(.section))
 
             }
-            .navigationTitle("Novo Exercício")
+            .navigationTitle("Novo exercício")
             .scrollContentBackground(.hidden)
             .background(.designSystem(color: .background(.secondary)))
 

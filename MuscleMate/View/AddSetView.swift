@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct AddSetModalView: View {
+struct AddSetView: View {
     @Binding var exercise: Exercise
     @Binding var isPresented: Bool
     

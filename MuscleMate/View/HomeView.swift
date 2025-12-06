@@ -26,13 +26,13 @@ struct HomeView: View {
                                 VStack(spacing: 8) {
                                     Text(day.dayName())
                                         .font(.designSystem(.caption))
-                                        .foregroundColor(day.isSameDay(as: selectedDate) ? .black : .secondary)
+                                        .foregroundColor(day.isSameDay(as: selectedDate) ? .primary : .secondary)
                                     
                                     Text("\(day.dayOfMonth)")
                                         .font(.designSystem(.button))
                                         .foregroundColor(day.isSameDay(as: selectedDate) ? .white : .primary)
                                         .frame(width: 40, height: 40)
-                                        .background(day.isSameDay(as: selectedDate) ? Color.blue : Color.gray.opacity(0.2))
+                                        .background(day.isSameDay(as: selectedDate) ? Color.designSystem(.main(.primary)) : Color.gray.opacity(0.2))
                                         .clipShape(Circle())
                                 }
                                 .onTapGesture {
@@ -63,7 +63,7 @@ struct HomeView: View {
                                     Text(workout.title)
                                         .font(.designSystem(.cell))
                                     Spacer()
-                                    Text("\(workout.exercises.count) exercises")
+                                    Text("\(workout.exercises.count) exercício(s)")
                                         .foregroundStyle(.designSystem(color: .main(.text)))
                                         .font(.designSystem(.cell))
                                 }

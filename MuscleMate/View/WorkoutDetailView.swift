@@ -38,7 +38,7 @@ struct WorkoutDetailView: View {
                     .onDelete { offsets in
                         exercise.sets.remove(atOffsets: offsets)
                     }
-                    
+
                     Button {
                         selectedExercise = exercise
                         showAddSetSheet = true
@@ -71,7 +71,7 @@ struct WorkoutDetailView: View {
         
         .sheet(isPresented: $showAddSetSheet) {
             if let bindingExercise = bindingForSelectedExercise() {
-                AddSetModalView(exercise: bindingExercise, isPresented: $showAddSetSheet)
+                AddSetView(exercise: bindingExercise, isPresented: $showAddSetSheet)
                     .presentationDetents([.medium])
             }
         }
