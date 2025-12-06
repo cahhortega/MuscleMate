@@ -1,3 +1,5 @@
+<img width="2022" height="332" alt="image" src="https://github.com/user-attachments/assets/7ab9abf1-310a-4175-bc2a-e45996efe49a" />
+
 # MuscleMate
 
 _**MuscleMate** é um diário de treinos que permite registrar treinos, exercícios e sets de forma fácil e organizada._
