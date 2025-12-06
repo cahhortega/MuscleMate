@@ -1,4 +1,4 @@
-# TICProject – SwiftUI Workout App
+# MuscleMate
 Aplicativo de gerenciamento de treinos em SwiftUI, com calendário semanal, cadastro de treinos, exercícios e sets, e persistência local usando JSON.
 
 ## Principais funcionalidades
@@ -45,3 +45,6 @@ Aplicativo de gerenciamento de treinos em SwiftUI, com calendário semanal, cada
 * Gráficos de progresso
 * App Intents com mais funcionalidades (adicionar exercícios aos treinos)
 * Testes unitários
+
+### Autor
+Carolina Ortega
